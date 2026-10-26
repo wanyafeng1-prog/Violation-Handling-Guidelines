@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>线上稽核系统 / Online Audit System</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- html2canvas for exporting image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    body {
+      -webkit-tap-highlight-color: transparent;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col pb-12">
+
+  <!-- Header Section -->
+  <header class="bg-indigo-700 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa-solid fa-clipboard-check text-xl"></i>
+        <h1 class="text-base sm:text-lg font-bold leading-tight" id="app-title">线上稽核系统</h1>
+      </div>
+      <button id="lang-toggle-btn" class="bg-indigo-800 hover:bg-indigo-900 text-white text-xs px-3 py-1.5 rounded-full border border-indigo-500 flex items-center space-x-1 transition">
+        <i class="fa-solid fa-globe"></i>
+        <span id="lang-btn-text">English</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Store Info Bar -->
+  <section class="bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 py-3 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
+      <div>
+        <label class="block text-slate-500 mb-1" id="label-store">门店名称 / Outlet</label>
+        <input type="text" id="input-store" value="Kuala Lumpur Store #01" class="w-full bg-slate-50 border border-slate-300 rounded px-2 py-1.5 focus:outline-none focus:border-indigo-500">
+      </div>
+      <div>
+        <label class="block text-slate-500 mb-1" id="label-auditor">稽核人员 / Auditor</label>
+        <input type="text" id="input-auditor" value="Admin" class="w-full bg-slate-50 border border-slate-300 rounded px-2 py-1.5 focus:outline-none focus:border-indigo-500">
+      </div>
+      <div>
+        <label class="block text-slate-500 mb-1" id="label-date">稽核日期 / Date</label>
+        <input type="date" id="input-date" class="w-full bg-slate-50 border border-slate-300 rounded px-2 py-1.5 focus:outline-none focus:border-indigo-500">
+      </div>
+    </div>
+  </section>
+
+  <!-- Total Score Bar -->
+  <section class="bg-indigo-50 border-b border-indigo-100 py-3">
+    <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
+      <div>
+        <span class="text-xs text-indigo-600 font-semibold block" id="label-score-title">当前总扣分 / Total Deductions</span>
+        <span id="total-deduction-display" class="text-2xl font-black text-rose-600">0 分</span>
+      </div>
+      <div class="text-right">
+        <span class="text-xs text-indigo-600 font-semibold block" id="label-status-title">评估状态 / Status</span>
+        <span id="audit-status-display" class="text-sm font-bold text-emerald-600 bg-emerald-100 px-2.5 py-1 rounded-full inline-block mt-0.5">合格 / Pass</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <nav class="bg-white border-b border-slate-200 sticky top-[52px] z-40 shadow-sm">
+    <div class="max-w-4xl mx-auto px-4 flex justify-around text-xs sm:text-sm font-semibold">
+      <button id="tab-btn
